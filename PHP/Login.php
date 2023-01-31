@@ -1,17 +1,20 @@
 <?php
 require_once("Cliente.php");
 require_once("Livros.php");
-
 class LoginADM{
     private string $login;
     private string $senha;
     private Cliente $cliente;
+    private Livro $livro;
 
-    public function __construct(string $login, string $senha, Cliente $cliente)
-        {
+    private int $quantidadedeLivro;
+
+    public function __construct(string $login, string $senha, Cliente $cliente, Livro $livro, int $quantidadedeLivro){
             $this->login = $login;
             $this->senha = $senha;
             $this->cliente = $cliente;
+            $this->livro = $livro;
+            $this->quantidadedeLivro = $quantidadedeLivro;
         }
 
         public function getLogin() : string{
@@ -28,17 +31,17 @@ class LoginADM{
             $this->senha = $senha;
         }
 
-        public function AcessarConta(loginADM $loginADM, string $login, string $senha)
+        public function AcessarConta(loginADM $loginADM, string $login, string $senha, Livro $livro, int $quantidadedeLivro)
         {           
-            if ($loginADM ->getLogin() == $login && $loginADM->getSenha() == $senha)
+            if ($loginADM->getLogin() == $login && $loginADM->getSenha() == $senha)
             {
                 echo("Logado com Sucesso");
+                echo $livro->imprimir($livro);
+                echo $livro->comprar($livro, $quantidadedeLivro);
                 return;
             }   
             echo("Login e senha incorretos, digite corretamente.");       
         }
-
-
 
 }
 ?>
